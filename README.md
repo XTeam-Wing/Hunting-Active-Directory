@@ -69,7 +69,8 @@ wmic /node: COMPUTER_NAME share get
 net group "Domain Computers" /domain | findstr "FILE"
 ```
 
-- powerview
+- powerview  
+[Cheat sheet](https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993)
 ```cpp
 Find-DomainShare
 Get-DomainFileServer
@@ -243,6 +244,8 @@ Invoke-Bloodhound -Verbose -Domain 'domain.local' -DomainController 'DC01.domain
 [https://github.com/hausec/Bloodhound-Custom-Queries/blob/master/customqueries.json](https://github.com/hausec/Bloodhound-Custom-Queries/blob/master/customqueries.json)
 [https://github.com/Integration-IT/Active-Directory-Exploitation-Cheat-Sheet/tree/master/F%20-%20BloodHound](https://github.com/Integration-IT/Active-Directory-Exploitation-Cheat-Sheet/tree/master/F%20-%20BloodHound)
 
+- Using BloodHound without collectors (ldapsearch stuff)  
+[Using Bloodhound in Linux environments](https://www.errno.fr/BloodhoundForLinux.html)
 
 ## SPN扫描到Kerberoasting
 
@@ -877,7 +880,10 @@ psexec.py rootkit.org/administrator@SRV-WEB-KIT.rootkit.org -k -no-pass
 ```go
 powerpick Get-DomainUser -PreauthNotRequired
 ```
-
+- Use with impacket script
+```go
+getNPUsers.py
+```
 
 存在的话.利用rubeus自动生成离线hash
 ```go
