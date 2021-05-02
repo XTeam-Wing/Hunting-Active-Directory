@@ -130,6 +130,11 @@ $Accessible | Get-SQLColumnSampleDataThreaded –Verbose –Threads 10 –Keywor
 Get-SQLColumnSampleData –Verbose –Keyword “card, password” –SampleSize 2 –ValidateCC -NoDefaults  –Instance "Server1\Instance1"
 
 ```
+
+- SqlClient in cobaltstrike(also use in lateral movement)  
+[sqlclient in github](https://github.com/FortyNorthSecurity/SqlClient)
+![image](https://user-images.githubusercontent.com/30458572/116821806-ee431e00-abad-11eb-8808-76ba273195a3.png)
+
 ### 定位用户
 ```cpp
 # Find where a specific user is logged in using Powerview:
